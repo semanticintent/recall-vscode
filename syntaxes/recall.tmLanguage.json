@@ -1,0 +1,126 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "RECALL",
+  "scopeName": "source.rcl",
+  "fileTypes": ["rcl"],
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#division-header" },
+    { "include": "#section-header" },
+    { "include": "#identification-keyword" },
+    { "include": "#environment-keyword" },
+    { "include": "#audit-keyword" },
+    { "include": "#data-level" },
+    { "include": "#pic-type" },
+    { "include": "#display-keyword" },
+    { "include": "#element-name" },
+    { "include": "#with-keyword" },
+    { "include": "#string" },
+    { "include": "#number" }
+  ],
+  "repository": {
+    "comment": {
+      "patterns": [
+        {
+          "name": "comment.line.asterisk.rcl",
+          "match": "^\\s*\\*.*$"
+        },
+        {
+          "name": "comment.line.asterisk.rcl",
+          "match": "^.{6}\\*.*$"
+        }
+      ]
+    },
+    "division-header": {
+      "match": "\\b(IDENTIFICATION|ENVIRONMENT|DATA|COMPONENT|AUDIT|PROCEDURE)\\s+(DIVISION)\\.",
+      "captures": {
+        "1": { "name": "keyword.control.division.rcl" },
+        "2": { "name": "keyword.control.division.rcl" }
+      }
+    },
+    "section-header": {
+      "match": "\\b(WORKING-STORAGE|ITEMS|CONFIGURATION|PALETTE|FONT|STYLE-BLOCK)\\s+(SECTION)\\.?",
+      "captures": {
+        "1": { "name": "keyword.control.section.rcl" },
+        "2": { "name": "keyword.control.section.rcl" }
+      }
+    },
+    "identification-keyword": {
+      "match": "^\\s+(PROGRAM-ID|PAGE-TITLE|DESCRIPTION|AUTHOR|DATE-WRITTEN|FAVICON|LANGUAGE)\\.",
+      "captures": {
+        "1": { "name": "keyword.other.identification.rcl" }
+      }
+    },
+    "audit-keyword": {
+      "match": "^\\s+(CREATED-BY|CREATED-DATE|CHANGE-LOG)\\.",
+      "captures": {
+        "1": { "name": "keyword.other.audit.rcl" }
+      }
+    },
+    "environment-keyword": {
+      "match": "^\\s+(VIEWPORT|COLOR-MODE|FONT-PRIMARY|FONT-SECONDARY|SUPPRESS-DEFAULT-CSS|LOAD\\s+PLUGIN|COPY\\s+FROM)\\b",
+      "captures": {
+        "1": { "name": "keyword.other.environment.rcl" }
+      }
+    },
+    "data-level": {
+      "match": "^\\s+(01|05|10)\\s+([A-Z][A-Z0-9-]+)",
+      "captures": {
+        "1": { "name": "constant.numeric.level.rcl" },
+        "2": { "name": "variable.other.field.rcl" }
+      }
+    },
+    "pic-type": {
+      "patterns": [
+        {
+          "match": "\\b(PIC)\\s+([A-Z0-9()V]+)",
+          "captures": {
+            "1": { "name": "keyword.other.pic.rcl" },
+            "2": { "name": "entity.name.type.pic.rcl" }
+          }
+        },
+        {
+          "match": "\\b(VALUE|COMMENT)\\b",
+          "name": "keyword.other.data.rcl"
+        }
+      ]
+    },
+    "display-keyword": {
+      "match": "^\\s+(DISPLAY|STOP\\s+RUN|STOP\\s+SECTION)\\b",
+      "captures": {
+        "1": { "name": "keyword.control.procedure.rcl" }
+      }
+    },
+    "element-name": {
+      "match": "\\b(HEADING-[123]|PARAGRAPH|LABEL|CODE-BLOCK|BUTTON|LINK|IMAGE|DIVIDER|SECTION|NAVIGATION|FOOTER|CARD-LIST|INPUT|BANNER|TABLE|STAT-GRID|BADGE|CALLOUT)\\b",
+      "name": "support.function.element.rcl"
+    },
+    "with-keyword": {
+      "patterns": [
+        {
+          "match": "\\b(WITH\\s+INTENT)\\b",
+          "name": "keyword.control.intent.rcl"
+        },
+        {
+          "match": "\\b(WITH\\s+DATA|WITH\\s+COLUMNS|WITH\\s+ROWS|USING|RESOLVE)\\b",
+          "name": "keyword.other.clause.rcl"
+        }
+      ]
+    },
+    "string": {
+      "name": "string.quoted.double.rcl",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.rcl",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "number": {
+      "match": "\\b([0-9]+)\\b",
+      "name": "constant.numeric.rcl"
+    }
+  }
+}

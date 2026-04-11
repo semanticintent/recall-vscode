@@ -1,0 +1,49 @@
+{
+  "name": "recall-language",
+  "displayName": "RECALL Language",
+  "description": "RECALL (.rcl) language support — syntax highlighting, diagnostics, autocomplete, hover, go-to-definition, rename",
+  "version": "0.1.0",
+  "publisher": "semanticintent",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Programming Languages"],
+  "keywords": ["recall", "rcl", "cobol", "language", "compiler"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/semanticintent/recall-vscode.git"
+  },
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "rcl",
+        "aliases": ["RECALL", "rcl"],
+        "extensions": [".rcl"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "rcl",
+        "scopeName": "source.rcl",
+        "path": "./syntaxes/recall.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.8.3",
+    "@vscode/vsce": "^3.0.0"
+  }
+}
